@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Abuse Your KOL</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="game-window">
+        <div class="title-bar">Abuse Your KOL</div>
+        
+        <div class="game-area">
+            <canvas id="gameCanvas"></canvas>
+            <div class="speech-bubble" id="speechBubble"></div>
+            <div id="godFinger"></div>
+        </div>
+        
+        <div class="bottom-panel">
+            <div class="money-display" id="moneyDisplay">0 SOL</div>
+            
+            <div class="menu-bar">
+                <button class="menu-btn" data-menu="items">Items</button>
+                <button class="menu-btn" data-menu="weapons">Weapons</button>
+                <button class="menu-btn" data-menu="skins">Skins</button>
+                <button class="menu-btn" data-menu="backgrounds">Backgrounds</button>
+                <button class="menu-btn" data-menu="modes">Modes</button>
+            </div>
+            
+            <!-- Dropdown Menus -->
+            <div class="dropdown-menu" id="itemsMenu">
+                <div class="menu-item selected" data-tool="hand" data-cost="0">
+                    <span>Hand</span>
+                    <span class="price">FREE</span>
+                </div>
+                <div class="menu-item" data-tool="tickle" data-cost="5">
+                    <span>Tickle</span>
+                    <span class="price">5 SOL</span>
+                </div>
+                <div class="menu-item" data-tool="fist" data-cost="25">
+                    <span>Fist</span>
+                    <span class="price">25 SOL</span>
+                </div>
+            </div>
+            
+            <div class="dropdown-menu" id="weaponsMenu">
+                <div class="menu-item" data-tool="grenade" data-cost="15">
+                    <span>Grenade</span>
+                    <span class="price">15 SOL</span>
+                </div>
+
+                <div class="menu-item" data-tool="solana" data-cost="50">
+                    <span>Explosive Solana</span>
+                    <span class="price">50 SOL</span>
+                </div>
+                <div class="menu-item" data-tool="missile" data-cost="75">
+                    <span>Missile</span>
+                    <span class="price">75 SOL</span>
+                </div>
+                <div class="menu-item" data-tool="flamethrower" data-cost="150">
+                    <span>Flamethrower</span>
+                    <span class="price">150 SOL</span>
+                </div>
+                <div class="menu-item" data-tool="godfinger" data-cost="500">
+                    <span>God Finger</span>
+                    <span class="price">500 SOL</span>
+                </div>  
+            </div>
+            
+            <div class="dropdown-menu" id="skinsMenu">
+                <div class="menu-item selected" data-skin="default" data-cost="0">
+                    <span>Default</span>
+                    <span class="price">FREE</span>
+                </div>
+                <div class="menu-item" data-skin="Orangie" data-cost="0">
+                    <span>Orangie</span>
+                    <span class="price">FREE</span>
+                </div>
+                <div class="menu-item" data-skin="TJR" data-cost="0">
+                    <span>TJR</span>
+                    <span class="price">FREE</span>
+                </div>
+                <div class="menu-item" data-skin="Frank" data-cost="0">
+                    <span>Frank</span>
+                    <span class="price">FREE</span>
+                </div>
+                <div class="menu-item" data-skin="Ansem" data-cost="0">
+                    <span>Ansem</span>
+                    <span class="price">FREE</span>
+                </div>
+                <div class="menu-item" data-skin="Thread Guy" data-cost="0">
+                    <span>Thread Guy</span>
+                    <span class="price">FREE</span>
+                </div>
+                <div class="menu-item" data-skin="Faze Banks" data-cost="0">
+                    <span>Faze Banks</span>
+                    <span class="price">FREE</span>
+                </div>
+                <div class="menu-item" data-skin="Logan Paul" data-cost="0">
+                    <span>Logan Paul</span>
+                    <span class="price">FREE</span>
+                </div>
+                <div class="menu-item" data-skin="Cupsey" data-cost="0">
+                    <span>Cupsey</span>
+                    <span class="price">FREE</span>
+                </div>
+            </div>
+
+            <div class="dropdown-menu" id="backgroundsMenu">
+                <div class="menu-item selected" data-background="default" data-cost="0">
+                    <span>Default</span>
+                    <span class="price">FREE</span>
+                </div>
+                <div class="menu-item" data-background="jail" data-cost="0">
+                    <span>Jail</span>
+                    <span class="price">FREE</span>
+                </div>
+                <div class="menu-item" data-background="miami" data-cost="0">
+                    <span>Miami</span>
+                    <span class="price">FREE</span>
+                </div>
+                <div class="menu-item" data-background="dubai" data-cost="0">
+                    <span>Dubai</span>
+                    <span class="price">FREE</span>
+                </div>
+                <div class="menu-item" data-background="casino" data-cost="0">
+                    <span>Casino</span>
+                    <span class="price">FREE</span>
+                </div>
+            </div>
+
+            <div class="dropdown-menu" id="modesMenu">
+                <div class="menu-item selected" data-mode="normal">
+                    <span>Normal Mode</span>
+                </div>
+                <div class="menu-item" data-mode="lowgrav" data-cost="30">
+                    <span>Low Gravity</span>
+                    <span class="price">30 SOL</span>
+                </div>
+                <div class="menu-item" data-mode="orangie" data-cost="50">
+                    <span>Orangie Mode</span>
+                    <span class="price">50 SOL</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/particles.js"></script>
+    <script src="js/buddy.js"></script>
+    <script src="js/ui.js"></script>
+    <script src="js/game.js"></script>
+</body>
+</html>

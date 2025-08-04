@@ -1,0 +1,255 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'MS Sans Serif', sans-serif;
+    background: #c0c0c0;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.game-window {
+    width: 100vw;
+    height: 100vh;
+    background: #c0c0c0;
+    border: 2px outset #c0c0c0;
+}
+
+.title-bar {
+    background: linear-gradient(90deg, #0055cc, #0099ff);
+    color: white;
+    padding: 4px 8px;
+    font-size: 11px;
+    font-weight: bold;
+    border-bottom: 1px solid #000080;
+}
+
+.game-area {
+    width: 100%;
+    height: calc(100vh - 100px);
+    background: linear-gradient(135deg, #a8b5a0 0%, #8a9982 50%, #7a8972 100%);
+    border: 2px inset #c0c0c0;
+    position: relative;
+}
+
+#gameCanvas {
+    display: block;
+    cursor: crosshair;
+}
+
+.bottom-panel {
+    height: 60px;
+    background: #c0c0c0;
+    border-top: 1px solid #808080;
+    display: flex;
+    align-items: center;
+    padding: 4px;
+}
+
+.money-display {
+    background: #000000;
+    color: #00ff00;
+    font-family: 'Courier New', monospace;
+    font-size: 14px;
+    font-weight: bold;
+    padding: 4px 8px;
+    border: 2px inset #c0c0c0;
+    margin-right: 10px;
+    min-width: 120px;
+}
+
+.menu-bar {
+    display: flex;
+    gap: 2px;
+    flex: 1;
+}
+
+.menu-btn {
+    background: #c0c0c0;
+    border: 1px outset #c0c0c0;
+    padding: 6px 12px;
+    font-size: 11px;
+    cursor: pointer;
+    font-family: 'MS Sans Serif', sans-serif;
+}
+
+.menu-btn:hover {
+    background: #e0e0e0;
+}
+
+.menu-btn:active, .menu-btn.active {
+    border: 1px inset #c0c0c0;
+    background: #a0a0a0;
+}
+
+.dropdown-menu {
+    position: absolute;
+    bottom: 62px;
+    background: #c0c0c0;
+    border: 2px outset #c0c0c0;
+    min-width: 200px;
+    display: none;
+    z-index: 1000;
+}
+
+.dropdown-menu.show {
+    display: block;
+}
+
+.menu-item {
+    padding: 6px 12px;
+    font-size: 11px;
+    cursor: pointer;
+    border-bottom: 1px solid #808080;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.menu-item:hover {
+    background: #0055cc;
+    color: white;
+}
+
+.menu-item:last-child {
+    border-bottom: none;
+}
+
+.menu-item.disabled {
+    color: #808080;
+    cursor: not-allowed;
+}
+
+.menu-item.disabled:hover {
+    background: #c0c0c0;
+    color: #808080;
+}
+
+.menu-item.selected {
+    background: #0055cc;
+    color: white;
+}
+
+.price {
+    font-size: 10px;
+    color: #666;
+}
+
+.menu-item:hover .price,
+.menu-item.selected .price {
+    color: white;
+}
+
+.speech-bubble {
+    position: absolute;
+    background: #ffffcc;
+    border: 3px solid #000000;
+    border-radius: 15px;
+    padding: 18px 24px;
+    font-size: 22px;
+    font-weight: bold;
+    color: #000000;
+    font-family: 'MS Sans Serif', sans-serif;
+    pointer-events: none;
+    z-index: 100;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    max-width: 300px;
+    min-width: 180px;
+    text-align: center;
+    box-shadow: 3px 3px 8px rgba(0, 0, 0, 0.4);
+    transform: translateX(-50%);
+}
+
+.speech-bubble::after {
+    content: '';
+    position: absolute;
+    bottom: -15px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 0;
+    border-left: 15px solid transparent;
+    border-right: 15px solid transparent;
+    border-top: 15px solid #000000;
+}
+
+.speech-bubble::before {
+    content: '';
+    position: absolute;
+    bottom: -12px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 0;
+    border-left: 12px solid transparent;
+    border-right: 12px solid transparent;
+    border-top: 12px solid #ffffcc;
+}
+
+.upload-section {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: #c0c0c0;
+    border: 2px outset #c0c0c0;
+    padding: 8px;
+    font-size: 11px;
+}
+
+.upload-btn {
+    background: #c0c0c0;
+    border: 1px outset #c0c0c0;
+    padding: 4px 8px;
+    font-size: 11px;
+    cursor: pointer;
+    font-family: 'MS Sans Serif', sans-serif;
+    width: 100%;
+}
+
+.upload-btn:active {
+    border: 1px inset #c0c0c0;
+}
+
+#headUpload {
+    display: none;
+}
+
+.stats-display {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background: #c0c0c0;
+    border: 2px inset #c0c0c0;
+    padding: 8px;
+    font-size: 11px;
+    min-width: 100px;
+}
+/* Style for the God Finger element */
+#godFinger {
+    position: absolute;
+    width: 150px; /* Adjust size as needed */
+    height: 225px; /* Adjust size as needed */
+    background-image: url('../assets/images/god_finger.png'); /* You will need to create this image */
+    background-size: contain;
+    background-repeat: no-repeat;
+    top: -300px; /* Start off-screen */
+    left: 0;
+    z-index: 999;
+    pointer-events: none;
+    transition: top 0.2s cubic-bezier(0.6, -0.28, 0.735, 0.045); /* Fast drop animation */
+}
+
+/* Screen shake animation */
+@keyframes shake {
+  0%, 100% { transform: translate(0, 0); }
+  10%, 30%, 50%, 70%, 90% { transform: translate(-8px, 8px); }
+  20%, 40%, 60%, 80% { transform: translate(8px, -8px); }
+}
+
+.shake {
+    animation: shake 0.5s;
+}

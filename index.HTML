@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Abuse Your KOL - Official Website</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        /* --- Basic Setup & Background --- */
+        body {
+            margin: 0;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            color: #ffffff;
+            /* This radial gradient mimics the background from your image */
+            background: #8b3c1d; /* Fallback color */
+            background-image: radial-gradient(circle at center, #ffca7a 0%, #e88c42 40%, #b8562c 75%, #8b3c1d 100%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start; /* Align content to the top */
+            min-height: 100vh;
+            padding: 20px;
+            box-sizing: border-box;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* --- Animated Background Elements --- */
+        .falling-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+            overflow: hidden;
+        }
+
+        .falling-element {
+            position: absolute;
+            top: -800px;
+            width: 60px;
+            height: 60px;
+            opacity: 1;
+            animation: fall-rotate linear infinite;
+        }
+
+        /* THIS IS THE NEW CSS RULE FOR THE AK IMAGE */
+        .ak-element {
+            width: 80px;
+            height: 80px;
+        }
+
+        .falling-element img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        /* Different falling speeds and delays for variety */
+        .falling-element:nth-child(1) { left: 5%; animation-duration: 8s; animation-delay: 0s; }
+        .falling-element:nth-child(2) { left: 15%; animation-duration: 10s; animation-delay: 1s; }
+        .falling-element:nth-child(3) { left: 25%; animation-duration: 9s; animation-delay: 2s; }
+        .falling-element:nth-child(4) { left: 35%; animation-duration: 11s; animation-delay: 0.5s; }
+        .falling-element:nth-child(5) { left: 45%; animation-duration: 8.5s; animation-delay: 3s; }
+        .falling-element:nth-child(6) { left: 55%; animation-duration: 9.5s; animation-delay: 1.5s; }
+        .falling-element:nth-child(7) { left: 65%; animation-duration: 10.5s; animation-delay: 2.5s; }
+        .falling-element:nth-child(8) { left: 75%; animation-duration: 8.8s; animation-delay: 0.8s; }
+        .falling-element:nth-child(9) { left: 85%; animation-duration: 9.2s; animation-delay: 3.5s; }
+        .falling-element:nth-child(10) { left: 95%; animation-duration: 10.2s; animation-delay: 1.8s; }
+
+        @keyframes fall-rotate {
+            0% {
+                top: -800px;
+                transform: rotate(0deg);
+            }
+            100% {
+                top: calc(100vh + 200px);
+                transform: rotate(360deg);
+            }
+        }
+
+        /* --- Header & Navigation --- */
+        .top-navigation {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            display: flex;
+            gap: 20px;
+            z-index: 10;
+        }
+
+        .nav-image-button {
+            display: block;
+            width: 60px;
+            height: 60px;
+            border-radius: 12px;
+            overflow: hidden;
+            transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .nav-image-button:hover {
+            transform: translateY(-8px) scale(1.1);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+            border-color: rgba(255, 255, 255, 0.4);
+        }
+
+        .nav-image-button img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        /* --- Main Content Wrapper --- */
+        .content-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            width: 100%;
+            padding-top: 90px; /* Give space below the nav */
+            position: relative;
+            z-index: 5;
+        }
+
+        /* --- Main Title Image --- */
+        .main-title-image {
+            max-width: 90%;
+            width: 100%;
+            max-width: 320px;
+            height: auto;
+            margin: 0 0 50px 0;
+            display: block;
+            /* Optional: Add a subtle drop shadow to make it pop */
+            filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3));
+        }
+        
+        /* --- Interactive Box --- */
+        .interactive-box {
+            background: rgba(0, 0, 0, 0.5);
+            padding: 30px;
+            border-radius: 15px;
+            border: 2px solid #FFDE59;
+            max-width: 500px;
+            width: 90%;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+        }
+        
+        .interactive-box .description {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin: 0 0 20px 0;
+            color: #f0f0f0;
+        }
+        
+        .play-button {
+            background-color: #D62828; /* Red color from the title shadow */
+            color: white;
+            font-size: 1.8rem;
+            font-weight: bold;
+            font-family: 'Arial Black', sans-serif;
+            padding: 15px 40px;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            width: 100%;
+            box-sizing: border-box; /* Add this line */
+            transition: transform 0.2s cubic-bezier(0.22, 1, 0.36, 1), background-color 0.2s ease;
+            border-bottom: 5px solid #a11e1e;
+        }
+
+        .play-button:hover {
+            transform: scale(1.05);
+        }
+
+        .play-button:active {
+            transform: scale(1.02);
+            border-bottom-width: 2px;
+            margin-top: 3px;
+        }
+
+        /* --- Contract Address Box --- */
+        .contract-box {
+            background: rgba(0, 0, 0, 0.5);
+            padding: 20px;
+            border-radius: 15px;
+            border: 2px solid #FFDE59;
+            max-width: 500px;
+            width: 90%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 50px;
+        }
+        
+        .contract-label {
+            margin: 0;
+            font-weight: bold;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .address-text {
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 1.1rem;
+            background-color: rgba(0, 0, 0, 0.3);
+            padding: 10px;
+            border-radius: 5px;
+            word-break: break-all; /* Ensures long address doesn't overflow */
+            margin: 0;
+        }
+        
+        .copy-button {
+            background-color: #FFDE59;
+            color: #44170a;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            margin-top: 10px;
+            transition: background-color 0.3s ease;
+        }
+        
+        .copy-button:hover {
+            background-color: #fff0b3;
+        }
+
+        /* --- KOL Carousel --- */
+        .kol-carousel-section {
+            width: 100vw;
+            margin-left: calc(-50vw + 50%);
+            margin-right: calc(-50vw + 50%);
+            margin-bottom: 50px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .carousel-title {
+            font-size: 2.2rem;
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 40px;
+            color: #FFDE59;
+            text-shadow: -3px 3px 0px #D62828, -2px 2px 6px rgba(0, 0, 0, 0.5);
+            letter-spacing: 1px;
+            padding: 0 20px;
+        }
+
+        .carousel-container {
+            overflow: hidden;
+            width: 100%;
+            position: relative;
+            background: linear-gradient(135deg, rgba(0, 0, 0, 0.6), rgba(139, 60, 29, 0.3));
+            padding: 30px 0;
+            border-top: 2px solid rgba(255, 222, 89, 0.3);
+            border-bottom: 2px solid rgba(255, 222, 89, 0.3);
+            box-shadow: 
+                0 10px 30px rgba(0, 0, 0, 0.5),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+        }
+
+        .carousel-track {
+            display: flex;
+            animation: scroll 30s linear infinite;
+            width: calc(200px * 24); /* 8 slides * 3 (for seamless loop) */
+        }
+
+        .kol-slide {
+            min-width: 200px;
+            padding: 0 15px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            flex-shrink: 0;
+        }
+
+        .kol-image {
+            width: 130px;
+            height: 170px;
+            border-radius: 20px;
+            border: 4px solid #FFDE59;
+            overflow: hidden;
+            margin-bottom: 20px;
+            box-shadow: 
+                0 8px 25px rgba(0, 0, 0, 0.4),
+                0 4px 15px rgba(255, 222, 89, 0.2),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            cursor: pointer;
+        }
+
+        .kol-link {
+            display: block;
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .kol-image::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, transparent 0%, rgba(255, 222, 89, 0.1) 100%);
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        .kol-image:hover {
+            transform: scale(1.08) translateY(-5px);
+            border-color: #fff;
+            box-shadow: 
+                0 15px 40px rgba(0, 0, 0, 0.6),
+                0 8px 25px rgba(255, 222, 89, 0.4),
+                inset 0 1px 0 rgba(255, 255, 255, 0.2);
+        }
+
+        .kol-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.4s ease;
+        }
+
+        .kol-image:hover img {
+            transform: scale(1.05);
+        }
+
+        .kol-name {
+            background: linear-gradient(135deg, rgba(0, 0, 0, 0.9), rgba(139, 60, 29, 0.8));
+            color: #FFDE59;
+            padding: 12px 18px;
+            border-radius: 12px;
+            font-weight: bold;
+            font-size: 0.95rem;
+            text-align: center;
+            border: 2px solid #FFDE59;
+            min-width: 90px;
+            max-width: 160px;
+            box-shadow: 
+                0 4px 15px rgba(0, 0, 0, 0.3),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+        }
+
+        .kol-name:hover {
+            background: linear-gradient(135deg, #FFDE59, #fff0b3);
+            color: #44170a;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(255, 222, 89, 0.3);
+        }
+
+        @keyframes scroll {
+            0% {
+                transform: translateX(0);
+            }
+            100% {
+                transform: translateX(calc(-200px * 8));
+            }
+        }
+
+        /* Pause animation on hover */
+        .carousel-track:hover {
+            animation-play-state: paused;
+        }
+
+        /* Add subtle gradient overlay at edges for fade effect */
+        .carousel-container::before,
+        .carousel-container::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            width: 60px;
+            z-index: 10;
+            pointer-events: none;
+        }
+
+        .carousel-container::before {
+            left: 0;
+            background: linear-gradient(to right, rgba(0, 0, 0, 0.8), transparent);
+        }
+
+        .carousel-container::after {
+            right: 0;
+            background: linear-gradient(to left, rgba(0, 0, 0, 0.8), transparent);
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="falling-container">
+        <div class="falling-element"><img src="images/grenade.png" alt=""></div>
+        <div class="falling-element"><img src="images/target.png" alt=""></div>
+        <div class="falling-element ak-element"><img src="images/ak.png" alt=""></div>
+        <div class="falling-element"><img src="images/grenade.png" alt=""></div>
+        <div class="falling-element"><img src="images/target.png" alt=""></div>
+        <div class="falling-element ak-element"><img src="images/ak.png" alt=""></div>
+        <div class="falling-element"><img src="images/grenade.png" alt=""></div>
+        <div class="falling-element"><img src="images/target.png" alt=""></div>
+        <div class="falling-element ak-element"><img src="images/ak.png" alt=""></div>
+        <div class="falling-element"><img src="images/grenade.png" alt=""></div>
+    </div>
+
+    <nav class="top-navigation">
+        <a href="https://x.com/AbuseYourKOL" target="_blank" class="nav-image-button">
+            <img src="images/xlogo.png" alt="Twitter">
+        </a>
+        <a href="https://dexscreener.com" target="_blank" class="nav-image-button">
+            <img src="images/dexlogo.png" alt="DexScreener">
+        </a>
+        <a href="https://letsbonk.fun/" target="_blank" class="nav-image-button">
+            <img src="images/bonklogo.png" alt="Bonk">
+        </a>
+    </nav>
+
+    <main class="content-wrapper">
+
+        <img src="images/TITLE.png" alt="Abuse Your KOL" class="main-title-image">
+
+        <div class="interactive-box">
+            <p class="description">Are you tired of being Exit Liquidity for your KOL's? Get your fucking blood back.</p>
+            <a href="game.html" class="play-button" style="display: inline-block; text-decoration: none; text-align: center;">ABUSE 'EM NOW</a>
+        </div>
+
+        <!-- KOL Carousel Section -->
+        <div class="kol-carousel-section">
+            <h2 class="carousel-title">Choose Your Victim</h2>
+            <div class="carousel-container">
+                <div class="carousel-track">
+                    <!-- First set of slides -->
+                    <div class="kol-slide">
+                        <a href="https://x.com/_TJRTrades" target="_blank" class="kol-link">
+                            <div class="kol-image">
+                                <img src="images/tjr.png" alt="KOL 1">
+                            </div>
+                            <div class="kol-name">TJR Trades</div>
+                        </a>
+                    </div>
+                    <div class="kol-slide">
+                        <a href="https://x.com/blknoiz06" target="_blank" class="kol-link">
+                            <div class="kol-image">
+                                <img src="images/ansem.png" alt="KOL 2">
+                            </div>
+                            <div class="kol-name">Ansem</div>
+                        </a>
+                    </div>
+                    <div class="kol-slide">
+                        <a href="https://x.com/LoganPaul" target="_blank" class="kol-link">
+                            <div class="kol-image">
+                                <img src="images/logan.png" alt="KOL 3">
+                            </div>
+                            <div class="kol-name">Logan Paul</div>
+                        </a>
+                    </div>
+                    <div class="kol-slide">
+                        <a href="https://x.com/notthreadguy" target="_blank" class="kol-link">
+                            <div class="kol-image">
+                                <img src="images/threadguy.png" alt="KOL 4">
+                            </div>
+                            <div class="kol-name">threadguy</div>
+                        </a>
+                    </div>
+                    <div class="kol-slide">
+                        <a href="https://x.com/frankdegods" target="_blank" class="kol-link">
+                            <div class="kol-image">
+                                <img src="images/frankdegods.png" alt="KOL 5">
+                            </div>
+                            <div class="kol-name">Frank de Gods</div>
+                        </a>
+                    </div>
+                    <div class="kol-slide">
+                        <a href="https://x.com/Banks" target="_blank" class="kol-link">
+                            <div class="kol-image">
+                                <img src="images/fazebanks.png" alt="KOL 6">
+                            </div>
+                            <div class="kol-name">Faze Banks</div>
+                        </a>
+                    </div>
+                    <div class="kol-slide">
+                        <a href="https://x.com/Cupseyy" target="_blank" class="kol-link">
+                            <div class="kol-image">
+                                <img src="images/Cupsey.png" alt="KOL 7">
+                            </div>
+                            <div class="kol-name">Cupseyy</div>
+                        </a>
+                    </div>
+                    <div class="kol-slide">
+                        <a href="https://x.com/orangie" target="_blank" class="kol-link">
+                            <div class="kol-image">
+                                <img src="images/orangie.png" alt="KOL 8">
+                            </div>
+                            <div class="kol-name">Orangie</div>
+                        </a>
+                    </div>
+                    <!-- Second set for seamless loop -->
+                    <div class="kol-slide">
+                        <a href="https://x.com/_TJRTrades" target="_blank" class="kol-link">
+                            <div class="kol-image">
+                                <img src="images/tjr.png" alt="KOL 1">
+                            </div>
+                            <div class="kol-name">TJR Trades</div>
+                        </a>
+                    </div>
+                    <div class="kol-slide">
+                        <a href="https://x.com/blknoiz06" target="_blank" class="kol-link">
+                            <div class="kol-image">
+                                <img src="images/ansem.png" alt="KOL 2">
+                            </div>
+                            <div class="kol-name">Ansem</div>
+                        </a>
+                    </div>
+                    <div class="kol-slide">
+                        <a href="https://x.com/LoganPaul" target="_blank" class="kol-link">
+                            <div class="kol-image">
+                                <img src="images/logan.png" alt="KOL 3">
+                            </div>
+                            <div class="kol-name">Logan Paul</div>
+                        </a>
+                    </div>
+                    <div class="kol-slide">
+                        <a href="https://x.com/notthreadguy" target="_blank" class="kol-link">
+                            <div class="kol-image">
+                                <img src="images/threadguy.png" alt="KOL 4">
+                            </div>
+                            <div class="kol-name">threadguy</div>
+                        </a>
+                    </div>
+                    <div class="kol-slide">
+                        <a href="https://x.com/frankdegods" target="_blank" class="kol-link">
+                            <div class="kol-image">
+                                <img src="images/frankdegods.png" alt="KOL 5">
+                            </div>
+                            <div class="kol-name">Frank de Gods</div>
+                        </a>
+                    </div>
+                    <div class="kol-slide">
+                        <a href="https://x.com/Banks" target="_blank" class="kol-link">
+                            <div class="kol-image">
+                                <img src="images/fazebanks.png" alt="KOL 6">
+                            </div>
+                            <div class="kol-name">Faze Banks</div>
+                        </a>
+                    </div>
+                    <div class="kol-slide">
+                        <a href="https://x.com/Cupseyy" target="_blank" class="kol-link">
+                            <div class="kol-image">
+                                <img src="images/Cupsey.png" alt="KOL 7">
+                            </div>
+                            <div class="kol-name">Cupseyy</div>
+                        </a>
+                    </div>
+                    <div class="kol-slide">
+                        <a href="https://x.com/orangie" target="_blank" class="kol-link">
+                            <div class="kol-image">
+                                <img src="images/orangie.png" alt="KOL 8">
+                            </div>
+                            <div class="kol-name">Orangie</div>
+                        </a>
+                    </div>
+                    <!-- Third set for ultra-smooth loop -->
+                    <div class="kol-slide">
+                        <a href="https://x.com/_TJRTrades" target="_blank" class="kol-link">
+                            <div class="kol-image">
+                                <img src="images/tjr.png" alt="KOL 1">
+                            </div>
+                            <div class="kol-name">TJR Trades</div>
+                        </a>
+                    </div>
+                    <div class="kol-slide">
+                        <a href="https://x.com/blknoiz06" target="_blank" class="kol-link">
+                            <div class="kol-image">
+                                <img src="images/ansem.png" alt="KOL 2">
+                            </div>
+                            <div class="kol-name">Ansem</div>
+                        </a>
+                    </div>
+                    <div class="kol-slide">
+                        <a href="https://x.com/LoganPaul" target="_blank" class="kol-link">
+                            <div class="kol-image">
+                                <img src="images/logan.png" alt="KOL 3">
+                            </div>
+                            <div class="kol-name">Logan Paul</div>
+                        </a>
+                    </div>
+                    <div class="kol-slide">
+                        <a href="https://x.com/notthreadguy" target="_blank" class="kol-link">
+                            <div class="kol-image">
+                                <img src="images/threadguy.png" alt="KOL 4">
+                            </div>
+                            <div class="kol-name">threadguy</div>
+                        </a>
+                    </div>
+                    <div class="kol-slide">
+                        <a href="https://x.com/frankdegods" target="_blank" class="kol-link">
+                            <div class="kol-image">
+                                <img src="images/frankdegods.png" alt="KOL 5">
+                            </div>
+                            <div class="kol-name">Frank de Gods</div>
+                        </a>
+                    </div>
+                    <div class="kol-slide">
+                        <a href="https://x.com/Banks" target="_blank" class="kol-link">
+                            <div class="kol-image">
+                                <img src="images/fazebanks.png" alt="KOL 6">
+                            </div>
+                            <div class="kol-name">Faze Banks</div>
+                        </a>
+                    </div>
+                    <div class="kol-slide">
+                        <a href="https://x.com/Cupseyy" target="_blank" class="kol-link">
+                            <div class="kol-image">
+                                <img src="images/Cupsey.png" alt="KOL 7">
+                            </div>
+                            <div class="kol-name">Cupseyy</div>
+                        </a>
+                    </div>
+                    <div class="kol-slide">
+                        <a href="https://x.com/orangie" target="_blank" class="kol-link">
+                            <div class="kol-image">
+                                <img src="images/orangie.png" alt="KOL 8">
+                            </div>
+                            <div class="kol-name">Orangie</div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="contract-box">
+            <p class="contract-label">$ABUSE Contract Address:</p>
+            <p id="contractAddress" class="address-text">TBA</p>
+            <button onclick="copyAddress()" class="copy-button" id="copyBtn">Copy Address</button>
+        </div>
+
+    </main>
+
+    <script>
+        function copyAddress() {
+            // Get the text from the address paragraph
+            const addressText = document.getElementById('contractAddress').innerText;
+            const copyButton = document.getElementById('copyBtn');
+
+            // Use the modern Navigator Clipboard API
+            navigator.clipboard.writeText(addressText).then(() => {
+                // Provide feedback to the user
+                copyButton.innerText = 'Copied!';
+                
+                // Revert the button text after 2 seconds
+                setTimeout(() => {
+                    copyButton.innerText = 'Copy Address';
+                }, 2000);
+
+            }).catch(err => {
+                console.error('Failed to copy text: ', err);
+                copyButton.innerText = 'Failed to Copy';
+            });
+        }
+    </script>
+
+</body>
+</html>
